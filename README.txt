@@ -1,31 +1,23 @@
-RFDS Conference EOI - Supabase capture
+RFDS EOI — Vercel + Supabase capture
 
-Files:
-- index.html = approved map/form with simplified EOI fields
-- api/eoi.js = Vercel serverless endpoint that inserts each submission into Supabase table pin_to_win_eois
+FILES
+- index.html = approved frontend with simplified EOI form
+- api/eoi.js = serverless endpoint that writes each EOI to pin_to_win_eois
 
-Vercel Environment Variables:
-SUPABASE_URL=https://pzpymyhudenvdfvqkebg.supabase.co
-SUPABASE_SECRET_KEY=<your real Supabase sb_secret_... key>
+VERCEL ENVIRONMENT VARIABLE
+Set only this required variable:
+
+SUPABASE_SECRET_KEY = your real Supabase sb_secret_... key
+
 Optional:
-RFDS_EOI_CLIENT_ID=RFDS-CAREERS-CONFERENCE-2026
+RFDS_EOI_CLIENT_ID = RFDS-CAREERS-CONFERENCE-2026
 
-Deployment layout:
-/
-  index.html
-  /api/eoi.js
+The Supabase project URL is built into api/eoi.js and does not need an environment variable.
 
-The browser never receives the Supabase secret key.
-Every successful form submission creates a new row in pin_to_win_eois.
-Expected table columns:
-ID text
-Client_ID text
-Submitted_at timestamptz
-full_name text
-email text
-phone text
-role text
-state_id text
-state_name text
-source_url text
-user_agent text
+IMPORTANT
+Add the variable to Production (and Preview if testing), then create a NEW deployment.
+Do not put the secret key into index.html or GitHub.
+
+TEST
+Submit three test EOIs and check Supabase > Table Editor > pin_to_win_eois.
+You should see three separate rows.

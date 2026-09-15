@@ -77,12 +77,12 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const supabaseUrl = clean(process.env.SUPABASE_URL, 500).replace(/\/$/, '');
-    const supabaseSecretKey = clean(process.env.SUPABASE_SECRET_KEY, 2000);
+    const supabaseUrl = 'https://pzpymyhudenvdfvqkebg.supabase.co';
+    const supabaseSecretKey = clean(process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY, 2000);
     const clientId = clean(process.env.RFDS_EOI_CLIENT_ID || 'RFDS-CAREERS-CONFERENCE-2026', MAX.clientId);
 
     if (!supabaseUrl || !supabaseSecretKey) {
-      console.error('EOI backend missing SUPABASE_URL or SUPABASE_SECRET_KEY');
+      console.error('EOI backend missing SUPABASE_SECRET_KEY');
       return sendJson(res, 500, {
         ok: false,
         error: 'Submission service is not configured.'
